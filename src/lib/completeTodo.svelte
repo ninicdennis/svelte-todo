@@ -13,8 +13,8 @@
   class="card w-96 bg-neutral text-neutral-content m-2 card-bordered border-success flex-4"
 >
   <div class="card-body">
-    <div class="card-actions justify-between">
-      <h2 class="card-title">{todo.title}</h2>
+    <div class="card-actions justify-between flex flex-nowrap flex-row">
+      <h2 class="card-title break-words">{todo.title}</h2>
       <button class="btn btn-square btn-sm" on:click={handleClose}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +31,6 @@
         >
       </button>
     </div>
-    <p>{todo.desc}</p>
+    <p class="break-words">{todo.desc}</p>
   </div>
 </div>
