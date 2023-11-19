@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { v4 as uuidv4 } from "uuid";
   import CompleteTodo from "./lib/completeTodo.svelte";
   import CreateTodo from "./lib/createTodo.svelte";
   import TodoCard from "./lib/todoCard.svelte";
@@ -18,17 +19,17 @@
     event: CustomEvent<{ title: string; desc: string }>
   ) => {
     const { title, desc } = event.detail;
-    todos = [...todos, { id: todos.length, title, desc, status: "INCOMPLETE" }];
+    todos = [...todos, { id: uuidv4(), title, desc, status: "INCOMPLETE" }];
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  const deleteTodo = (event: CustomEvent<{ id: number }>) => {
+  const deleteTodo = (event: CustomEvent<{ id: string }>) => {
     const { id } = event.detail;
     todos = todos.filter((t) => t.id !== id);
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  const completeTodo = (event: CustomEvent<{ id: number }>) => {
+  const completeTodo = (event: CustomEvent<{ id: string }>) => {
     const { id } = event.detail;
     const completedIndex = todos.findIndex((t) => t.id === id);
     todos[completedIndex].status = "COMPLETE";
