@@ -9,7 +9,6 @@
 
   onMount(() => {
     const localStorageTodos = JSON.parse(localStorage.getItem("todos") || "[]");
-    console.log(localStorageTodos);
     todos = localStorageTodos;
   });
 
