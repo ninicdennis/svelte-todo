@@ -10,6 +10,9 @@
     submitted = true;
     if (title.length > 0 && desc.length > 0) {
       dispatch("submitNewTodo", { title, desc });
+      title = "";
+      desc = "";
+      submitted = false;
     }
   };
 </script>
