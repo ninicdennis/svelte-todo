@@ -9,31 +9,25 @@
   let todos: Todo[];
 
   onMount(() => {
-    const localStorageTodos = JSON.parse(localStorage.getItem("todos") || "[]");
-    todos = localStorageTodos;
+    todos = JSON.parse(localStorage.getItem("todos") || "[]");
   });
 
   $: todos = [];
+  $: if (todos.length) localStorage.setItem("todos", JSON.stringify(todos));
 
-  const createNewTodo = (
-    event: CustomEvent<{ title: string; desc: string }>
-  ) => {
-    const { title, desc } = event.detail;
+  const createNewTodo = ({
+    detail: { title, desc },
+  }: CustomEvent<{ title: string; desc: string }>) => {
     todos = [...todos, { id: uuidv4(), title, desc, status: "INCOMPLETE" }];
-    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  const deleteTodo = (event: CustomEvent<{ id: string }>) => {
-    const { id } = event.detail;
+  const deleteTodo = ({ detail: { id } }: CustomEvent<{ id: string }>) => {
     todos = todos.filter((t) => t.id !== id);
-    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  const completeTodo = (event: CustomEvent<{ id: string }>) => {
-    const { id } = event.detail;
+  const completeTodo = ({ detail: { id } }: CustomEvent<{ id: string }>) => {
     const completedIndex = todos.findIndex((t) => t.id === id);
     todos[completedIndex].status = "COMPLETE";
-    localStorage.setItem("todos", JSON.stringify(todos));
   };
 </script>
 
