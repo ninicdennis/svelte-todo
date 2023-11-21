@@ -8,6 +8,7 @@
 
   const handleSubmit = () => {
     submitted = true;
+
     if (title.length > 0 && desc.length > 0) {
       dispatch("submitNewTodo", { title, desc });
       title = "";
@@ -24,17 +25,15 @@
       bind:value={title}
       type="text"
       placeholder="Title"
-      class={`input input-bordered w-full max-w-xs ${
-        title.length === 0 && submitted && "input-error"
-      }`}
+      class:input-error={title.length === 0 && submitted}
+      class={`input input-bordered w-full max-w-xs`}
     />
     <input
       bind:value={desc}
       type="text"
       placeholder="Description"
-      class={`input input-bordered w-full max-w-xs ${
-        desc.length === 0 && submitted && "input-error"
-      }`}
+      class:input-error={title.length === 0 && submitted}
+      class={`input input-bordered w-full max-w-xs `}
     />
     <div class="card-actions justify-end">
       <button class="btn btn-primary" on:click={handleSubmit}>Create!</button>
