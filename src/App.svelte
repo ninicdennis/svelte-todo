@@ -23,6 +23,8 @@
 
   const deleteTodo = ({ detail: { id } }: CustomEvent<{ id: string }>) => {
     todos = todos.filter((t) => t.id !== id);
+    // ? Needed to be set here, above will not wipe when empty.
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   const completeTodo = ({ detail: { id } }: CustomEvent<{ id: string }>) => {
