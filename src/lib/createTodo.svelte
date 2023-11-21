@@ -32,7 +32,7 @@
       bind:value={desc}
       type="text"
       placeholder="Description"
-      class:input-error={title.length === 0 && submitted}
+      class:input-error={desc.length === 0 && submitted}
       class={`input input-bordered w-full max-w-xs `}
     />
     <div class="card-actions justify-end">
